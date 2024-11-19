@@ -1,0 +1,45 @@
+Buffer: A Temporary holding spot for data that is being moved from one place to another.
+Stream: A Sequence of data made available over time. Streams are readable, writable, or both. All streams are instances of EventEmitter.
+Chunk: A piece of data being sent through a stream. Data is split into chunks and sent through a stream.
+Pipe: Connecting a readable stream to a writable stream. All data that is read from the readable stream is then written to the writable stream.
+Error-First Callback: Callbacks take an error object as their first parameter. null if no error otherwise will contain an object defining the error. This is a standard so we know in what order to place our parameters for our callbacks.
+Method Chaining: A Method returns an object so we can keep calling more methods. Sometimes it returns the parent object (called Cascading) and sometimes another object entirely.
+
+# Async JS, Promises, & Request
+
+CallStack: Mechanism that helps the JS interpreter keep track of its place in a script that calls multiple functions. How JS "knows" what function is currently being run and what functions are called from within that function.
+It uses a stack data structure to manage this, which means that the last function that gets pushed onto the stack is the first to be popped off when the function returns.
+
+How it works:
+1. When a script calls a function, the interpreter adds it to the call stack and then starts carrying out the function.
+2. Any functions that are called by that function are added to the call stack further up, and run where their calls are reached.
+3. When the current function is finished, the interpreter takes it off the stack and resumes execution where
+
+for example:
+  const multiply = (x, y) => x * y;
+  const square = (x) => multiply(x, x);
+  const isRightTriangle = (a, b, c) => {
+    return square(a) + square(b) === square(c);
+  };
+
+  isRightTriangle(3, 4, 5);
+
+Callback: A function that is to be executed after another function has finished executing — hence the name 'call back'.
+
+Callback Hell: A series of nested callbacks that make the code difficult to read or follow. This is a problem with asynchronous programming in general and not just JavaScript.
+
+for example: 
+  fs.readFile('example.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      fs.writeFile('example2.txt', data, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('File written successfully');
+        }
+      });
+    }
+  });
+
